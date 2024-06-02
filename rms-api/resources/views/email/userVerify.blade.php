@@ -9,7 +9,7 @@
 <body>
     <h2>Dear <span>{{$details['name']}}</span></h2>
     <p>We are requesting you to verify your email address Please clink bellow link to verify your account</p>
-    <a href="/auth/verify/{{ $details['token'] }}/{{ $details['hashEmail'] }}">Verify Here</a>
+    <a href="{{ config('app.url') }}/auth/verify/{{ $details['token'] }}/{{ $details['hashEmail'] }}">Verify Here</a>
     <br><br><br>
     <p>Thank you!</p>
 </body>
