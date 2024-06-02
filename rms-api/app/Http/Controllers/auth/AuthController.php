@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\auth;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\VerifyUserJobs;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -61,8 +63,13 @@ class AuthController extends Controller
 
         $user = User::create(array_merge(
                     $validator->validated(),
-                    ['password' => bcrypt($request->password)]
+                    ['password' => bcrypt($request->password), 'token' => Str::random(20)]
                 ));
+
+        if($user) {
+            $details = ['name' => $user->name, 'email' => $user->email, 'token' => $user->token];
+            dispatch(new VerifyUserJobs($details));
+        }
 
         return response()->json([
             'message' => 'User successfully registered',
