@@ -63,7 +63,7 @@ class AuthController extends Controller
 
         $user = User::create(array_merge(
                     $validator->validated(),
-                    ['password' => bcrypt($request->password), 'token' => Str::random(20)]
+                    ['password' => bcrypt($request->password),'slug'=>Str::random(15),'token'=>Str::random(20),'status'=>'active']
                 ));
 
         if($user) {
