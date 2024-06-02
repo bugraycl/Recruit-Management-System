@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Str;
@@ -67,7 +68,7 @@ class AuthController extends Controller
                 ));
 
         if($user) {
-            $details = ['name' => $user->name, 'email' => $user->email, 'token' => $user->token];
+            $details = ['name' => $user->name, 'email' => $user->email, 'hashEmail'=>Crypt::encryptString($user->email), 'token' => $user->token];
             dispatch(new VerifyUserJobs($details));
         }
 
