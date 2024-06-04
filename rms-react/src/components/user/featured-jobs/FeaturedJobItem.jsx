@@ -1,16 +1,17 @@
 import React from 'react'
-import icon from "../../../assets/images/default.png"
 import { Link } from 'react-router-dom'
-const FeaturedJobItem = () => {
+import defaultIcon from "../../../assets/images/default.png"
+
+const FeaturedJobItem = ({ title, type, company, slug, icon }) => {
   return (
     <div className="featured_job--wrapper__card">
         <div className='featured_job--wrapper__card--left'>
-            <img src={icon} alt="" width="100px" height="100px" />
+            <img src={defaultIcon} alt="" width="100px" height="100px" />
         </div>
         <div className='featured_job--wrapper__card--right'>
-            <h1>Software Engineer</h1>
-            <p>Enosis Solution</p>
-            <Link to="#" className='featured_job--wrapper__card--right__status'>Full Time</Link>
+            <h1>{title}</h1>
+            <p>{company}</p>
+            <Link to={`/job-details/${slug}`} className={type === "full time" ? "full-time" : "half-time"}>{type}</Link>
         </div>
     </div>
   )

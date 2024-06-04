@@ -1,15 +1,15 @@
 import React from 'react'
-import catIcon from '../../../assets/images/default.png'
 import { Link } from "react-router-dom"
+import defaultIcon from "../../../assets/images/default.png"
 
-const CategoryItem = () => {
+const CategoryItem = ({name,icon,slug,count}) => {
   return (
     <div className="category-container--card-wrapper__card">
-        <img src={catIcon} alt="Category-icon" width="100px" height="100px" />
-        <Link to="#">
-        <h1>Engineer Section</h1>
+        <img src={defaultIcon} alt="Category-icon" width="100px" height="100px" />
+        <Link to={`categories/jobs/${slug}`}>
+        <h1>{name}</h1>
         </Link>
-        <p>12</p>
+        <p>{count}</p>
   </div>
   )
 }

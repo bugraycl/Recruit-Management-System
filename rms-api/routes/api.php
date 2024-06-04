@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,9 +35,11 @@ Route::group([
 
 
 Route::group([
-    'middleware' => 'auth:api'
+    'middleware' => 'api'
 
 ], function ($router) {
     Route::get('/categories', [CategoryController::class, 'index']);
 
 });
+
+Route::get('/home',[HomeController::class,'index']);
